@@ -167,7 +167,7 @@
         <configuration>
           <suiteXmlFiles>
             <!--suppress UnresolvedMavenProperty -->
-            <suiteXmlFile>src/test/resources/testsuites/$(suite).xml</suiteXmlFile>
+            <suiteXmlFile>src/test/resources/testsuites/testngit.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
