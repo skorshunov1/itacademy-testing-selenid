@@ -1,17 +1,39 @@
 package com.itacademy;
 
 import com.codeborne.selenide.*;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import com.itacademy.listeners.LocalListeners;
+import io.qameta.allure.selenide.AllureSelenide;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.matcher.RestAssuredMatchers;
+import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.path.xml.XmlPath;
+import io.restassured.response.Response;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static io.restassured.RestAssured.given;
 
 
 public class TestOnSelenid {
+    @BeforeMethod
+    public void setUp(){
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true)
+        );
+        SelenideLogger.addListener("LocalListener", new LocalListeners());
+    }
 
     @Test
     public void addOneProduct() {
@@ -78,5 +100,6 @@ public class TestOnSelenid {
         System.out.println(num1);
         System.out.println(allProduct.equals(oneProduct));
     }
+
 }
 
